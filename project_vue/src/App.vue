@@ -3,8 +3,8 @@
   <nav class="navbar">
     <ul>
     <li><router-link to="/" class="navbar-item">Home</router-link></li>
-    <li><router-link to="/about" class="navbar-item">Task</router-link></li>
-    <li><router-link to="/about" class="navbar-item">Category</router-link></li>
+    <li><router-link to="/tasks" class="navbar-item">Task</router-link></li>
+    <li><router-link to="/categories" class="navbar-item">Category</router-link></li>
     </ul>
   </nav>
   <section>
