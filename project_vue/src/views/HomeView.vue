@@ -15,8 +15,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 import axios from 'axios'
 
 export default {
@@ -35,7 +33,7 @@ export default {
         .get('/api/v1/tasks/')
         .then(response => {
           if (response.data.length > 0) {
-            this.latestTask = response.data[0];
+            this.latestTask = response.data.slice(-1)[0];
           }
         })
         .catch(error => {

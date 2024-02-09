@@ -1,10 +1,13 @@
 <template>
 <div>
-  <nav class="navbar">
+  <nav class="navbar" id="navbar">
     <ul>
-    <li><router-link to="/" class="navbar-item">Home</router-link></li>
-    <li><router-link to="/tasks" class="navbar-item">Task</router-link></li>
-    <li><router-link to="/categories" class="navbar-item">Category</router-link></li>
+      <li><router-link to="/" class="navbar-item">Home</router-link></li>
+      <li><router-link to="/tasks" class="navbar-item">Task</router-link></li>
+      <li><router-link to="/categories" class="navbar-item">Category</router-link></li>
+    </ul>
+    <ul class="navbar-right">
+      <li><router-link to="/about" class="navbar-item">Login</router-link></li>
     </ul>
   </nav>
   <section>
@@ -29,9 +32,10 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #333;
   color: #fff;
   background-color: black;
+  display: flex; 
+  justify-content: space-between;
 
   a {
   color: #fff;
@@ -55,6 +59,10 @@
     display: inline;
     margin-right: 10px;
   }
+  .navbar-right{
+    display: flex; 
+    align-items: center; 
+  }
 }
 
 section{
@@ -68,8 +76,26 @@ section{
   left: 0;
   right: 0;
   text-align: center;
-  background-color: #333;
   color: #fff;
+  background-color: black;
 }
 
 </style>
+<script>
+export default {
+  mounted() {
+    let prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+      const currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById("navbar").style.top = "0";
+        document.getElementById("navbar").style.transition = "top 0.2s ease-in-out";
+      } else {
+        document.getElementById("navbar").style.top = "-55px";
+        document.getElementById("navbar").style.transition = "top 0.2s ease-in-out";
+      }
+      prevScrollpos = currentScrollPos;
+    }
+  }
+}
+</script>
