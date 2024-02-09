@@ -7,7 +7,7 @@
       <li><router-link to="/categories" class="navbar-item">Category</router-link></li>
     </ul>
     <ul class="navbar-right">
-      <li><router-link to="/about" class="navbar-item">Login</router-link></li>
+      <li><router-link to="/login" class="navbar-item">Login</router-link></li>
     </ul>
   </nav>
   <section>
@@ -82,7 +82,19 @@ section{
 
 </style>
 <script>
+import axios from 'axios'
 export default {
+  beforeCreate(){
+    this.$store.commit('initializeStore')
+    const token = this.$store.state.token
+
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = "Token " + token
+    }
+    else{
+      axios.defaults.headers.common['Authorization'] = ""
+    }
+  },
   mounted() {
     let prevScrollpos = window.pageYOffset;
     window.onscroll = function() {

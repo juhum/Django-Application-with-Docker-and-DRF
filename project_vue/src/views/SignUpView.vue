@@ -52,6 +52,9 @@ export default {
             errors: []
         }
     },
+    mounted(){
+    document.title = "Sign Up"
+    },
     methods: {
         submitForm(){
             this.errors = []
@@ -81,7 +84,7 @@ export default {
                     this.$router.push('/login')
                 }).catch(error =>{
                     if (error.response){
-                        for (const property in error.response.data) {
+                        for (const property in error.response.data) {   //FIX ERROS SHOWING
                             this.errors.push('${property}: ${error.response.data[property]}')
                         }
                         console.log(JSON.stringify(error.response.data))
