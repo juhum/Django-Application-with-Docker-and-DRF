@@ -12,14 +12,14 @@
             <div class="field">
                 <label>Password</label>
                 <div class="control">
-                    <input type="text" class="input" v-model="password">
+                    <input type="password" class="input" v-model="password">
                 </div>
             </div>
 
             <div class="field">
                 <label>Confirm Password</label>
                 <div class="control">
-                    <input type="text" class="input" v-model="password2">
+                    <input type="password" class="input" v-model="password2">
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
             </div>
 
             <hr>
-            <router-link to="/login">click here</router-link> to log in
+            <router-link to="/login">Already have an account ?</router-link>
         </form>
     </div>
 </template>
@@ -85,7 +85,7 @@ export default {
                 }).catch(error =>{
                     if (error.response){
                         for (const property in error.response.data) {   //FIX ERROS SHOWING
-                            this.errors.push('${property}: ${error.response.data[property]}')
+                            this.errors.push(`${property}: ${error.response.data[property]}`)
                         }
                         console.log(JSON.stringify(error.response.data))
                     } else if(error.message) {

@@ -7,7 +7,12 @@
       <li><router-link to="/categories" class="navbar-item">Category</router-link></li>
     </ul>
     <ul class="navbar-right">
-      <li><router-link to="/login" class="navbar-item">Login</router-link></li>
+      <template v-if="$store.state.isAuthenticated">
+        <li @click="logout" class="navbar-item">Logout</li>
+      </template>
+      <template v-else>
+        <li><router-link to="/login" class="navbar-item">Login</router-link></li>
+      </template>
     </ul>
   </nav>
   <section>
@@ -93,6 +98,19 @@ export default {
     }
     else{
       axios.defaults.headers.common['Authorization'] = ""
+    }
+  },
+    methods: {
+    logout() {
+      axios.defaults.headers.common["Authorization"] = ""
+
+      localStorage.removeItem("token")
+      localStorage.removeItem("username")
+      localStorage.removeItem("userid")
+
+      this.$store.commit('removeToken')
+
+      this.$router.push('/')
     }
   },
   mounted() {
