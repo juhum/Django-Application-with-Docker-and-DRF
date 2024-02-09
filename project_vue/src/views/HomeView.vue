@@ -26,6 +26,7 @@ export default {
   },
   mounted() {
     this.getLatestTask();
+    document.title = "Home"
   },
   methods: {
     getLatestTask() {

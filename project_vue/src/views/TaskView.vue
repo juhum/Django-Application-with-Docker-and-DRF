@@ -29,6 +29,7 @@ export default {
   },
   mounted() {
     this.getTasks();
+    document.title = "Tasks"
   },
   methods: {
     getTasks() {
