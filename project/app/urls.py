@@ -7,4 +7,5 @@ urlpatterns = [
     path('tasks/', views.TaskView.as_view()),
     path('category/', views.CategoryView.as_view()),
     path('tasks/category/<int:category_id>/', get_tasks_by_category, name='get_tasks_by_category'),
+    path('tasks/<int:pk>/', views.TaskDetailView.as_view()),
 ]
