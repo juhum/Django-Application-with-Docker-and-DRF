@@ -2,7 +2,7 @@
   <div>
     <div class="home">
       Categories:
-      <button @click="showForm = !showForm">Add category</button>
+      <button v-if="$store.state.isAuthenticated" @click="showForm = !showForm">Add category</button>
       <form v-if="showForm" @submit.prevent="addCategory">
         <input v-model="newCategory.name" placeholder="Category name" required>
         <button type="submit">Add category</button>
@@ -14,8 +14,8 @@
     </div>
     <div class="category">
       <div v-for="category in categories" :key="category.id">
-        <button @click="editCategory(category)">Edit</button>
-        <button @click="deleteCategory(category)">Delete</button>
+        <button v-if="$store.state.isAuthenticated" @click="editCategory(category)">Edit</button>
+        <button v-if="$store.state.isAuthenticated" @click="deleteCategory(category)">Delete</button>
         <h1>C: {{ category.name }}</h1>
         <div v-if="category.id === selectedCategoryId" class="tasks">
           <div v-for="task in tasksByCategory(category.id)" :key="task.id">
