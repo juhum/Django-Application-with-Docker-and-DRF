@@ -51,13 +51,16 @@ class TaskView(APIView):
 class TaskDetailView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-    def get(self, request, pk, format=None):
+    def get_object(self, pk):
         try:
-            task = Task.objects.get(pk=pk)
-            serializer = TaskSerializer(task)
-            return Response(serializer.data)
+            return Task.objects.get(pk=pk)
         except Task.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            raise status.HTTP_404_NOT_FOUND
+
+    def get(self, request, pk, format=None):
+        task = self.get_object(pk)
+        serializer = TaskSerializer(task)
+        return Response(serializer.data)
 
     def post(self, request, pk, format=None):
         serializer = TaskSerializer(data=request.data)
@@ -66,6 +69,14 @@ class TaskDetailView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def put(self, request, pk, format=None):
+        task = self.get_object(pk)
+        serializer = TaskSerializer(task, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
     def delete(self, request, pk, format=None):
         try:
             task = Task.objects.get(pk=pk)
