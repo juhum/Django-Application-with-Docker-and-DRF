@@ -18,6 +18,8 @@ Navigate to the project directory.
 Change name of example.env to .env and enter the secret key.
 
 
+
+### OPTIONAL
 run:
 ```bash
 python manage.py migrate
