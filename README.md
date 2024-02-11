@@ -38,10 +38,10 @@ save your token.
 
 ## Building and Running with Docker Compose:
 
-Execute the following command to build and run the application using Docker Compose:
-
+Execute the following command in the root directory to build and run the application using Docker Compose:
+```bash
 docker-compose up --build
-
+```
 ## API Endpoints
 
 Task has fields: id (auto-generated), title, description, completed (boolean), and category (foreign key to Category model).
