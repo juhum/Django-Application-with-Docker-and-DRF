@@ -20,7 +20,7 @@
   </section>
 
   <footer class="footer">
-    <p>test</p>
+    <p>Showcase</p>
     </footer>
   </div>
 </template>
