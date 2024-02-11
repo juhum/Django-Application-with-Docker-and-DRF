@@ -1,27 +1,32 @@
 <template>
-  <div>
-    <div class="home">
-      Categories:
+  <div class="category-manager">
+    <div class="category-manager__header">
+      <h1>Categories</h1>
       <button v-if="$store.state.isAuthenticated" @click="showForm = !showForm">Add category</button>
-      <form v-if="showForm" @submit.prevent="addCategory">
-        <input v-model="newCategory.name" placeholder="Category name" required>
-        <button type="submit">Add category</button>
-      </form>
-      <form v-if="categoryToEdit" @submit.prevent="saveCategory">
+    </div>
+
+    <form v-if="showForm" @submit.prevent="addCategory" class="category-form">
+      <input v-model="newCategory.name" placeholder="Category name" required>
+      <button type="submit">Add category</button>
+    </form>
+
+    <div v-if="categoryToEdit" class="edit-category-form">
+      <form @submit.prevent="saveCategory">
         <input v-model="categoryToEdit.name" placeholder="Category name" required>
         <button type="submit">Save category</button>
       </form>
     </div>
-    <div class="category">
-      <div v-for="category in categories" :key="category.id">
+
+    <div class="category-list">
+      <div v-for="category in categories" :key="category.id" class="category-item" @click="getTasksByCategory(category.id)">
         <button v-if="$store.state.isAuthenticated" @click="editCategory(category)">Edit</button>
         <button v-if="$store.state.isAuthenticated" @click="deleteCategory(category)">Delete</button>
-        <h1>C: {{ category.name }}</h1>
+        <h2>{{ category.name }}</h2>
         <div v-if="category.id === selectedCategoryId" class="tasks">
-          <div v-for="task in tasksByCategory(category.id)" :key="task.id">
-            <h3>T: {{ task.title }}</h3>
-            <h3>D: {{ task.description }}</h3>
-            <h3>{{ task.completed }}</h3>
+          <div v-for="task in tasksByCategory(category.id)" :key="task.id" class="task">
+            <h3>{{ task.title }}</h3>
+            <p>{{ task.description }}</p>
+            <p>Status: {{ task.completed ? 'Completed' : 'Incomplete' }}</p>
           </div>
         </div>
       </div>
@@ -126,3 +131,59 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.category-manager {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.category-manager__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.category-form {
+  margin-bottom: 20px;
+}
+
+.edit-category-form {
+  margin-bottom: 20px;
+}
+
+.category-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.category-item button {
+  margin-right: 10px;
+}
+
+.category-item h2 {
+  margin: 0;
+}
+
+.tasks {
+  margin-left: 20px;
+}
+
+.task {
+  border: 1px solid #eee;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.task h3 {
+  margin: 0;
+}
+
+.task p {
+  margin: 5px 0;
+}
+</style>

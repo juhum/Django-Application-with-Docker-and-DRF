@@ -18,7 +18,12 @@ WORKDIR ${PROJ_DIR}
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
-COPY ./compose/django/entry.sh /entry.sh
-RUN chmod +x /entry.sh
-ENTRYPOINT ["/entry.sh"]
+
+# Run database migrations
+RUN python manage.py migrate
+
+# Command to run the Django development server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000", "--insecure"]
+
+
 

@@ -32,6 +32,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body{
+    background: #272727;
+    color: white;
+}
+
 .navbar {
   position: fixed;
   top: 0;
@@ -82,6 +87,21 @@ section{
   right: 0;
   text-align: center;
   color: #fff;
+  background-color: black;
+}
+
+
+button {
+  padding: 10px 20px;
+  background-color: #121212;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
   background-color: black;
 }
 

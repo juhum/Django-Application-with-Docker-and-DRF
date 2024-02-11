@@ -1,9 +1,11 @@
- <template>
-<div>
-  <div class="home">
-    Tasks:
-        <button v-if="$store.state.isAuthenticated" @click="showForm = !showForm">Add task</button>
-    <form v-if="showForm" @submit.prevent="addTask">
+<template>
+  <div class="task-manager">
+    <div class="task-manager__header">
+      <h1>Tasks</h1>
+      <button v-if="$store.state.isAuthenticated" @click="showForm = !showForm">Add task</button>
+    </div>
+
+    <form v-if="showForm" @submit.prevent="addTask" class="task-form">
       <input v-model="newTask.title" placeholder="Task title" required>
       <input v-model="newTask.description" placeholder="Task description" required>
       <select v-model="newTask.category" required>
@@ -12,35 +14,36 @@
           {{ category.name }}
         </option>
       </select>
-      <input type="checkbox" id="completed" v-model="newTask.completed">
-      <label for="completed">Completed</label>
+      <label><input type="checkbox" v-model="newTask.completed"> Completed</label>
       <button type="submit">Submit task</button>
     </form>
-    <form v-if="taskToEdit" @submit.prevent="saveTask">
-      <input v-model="taskToEdit.title" placeholder="Task title" required>
-      <input v-model="taskToEdit.description" placeholder="Task description" required>
-      <select v-model="taskToEdit.category" required>
-        <option disabled value="">Please select a category</option>
-        <option v-for="category in categories" :value="category.id" :key="category.id">
-          {{ category.name }}
-        </option>
-      </select>
-      <input type="checkbox" id="completed" v-model="taskToEdit.completed">
-      <label for="completed">Completed</label>
-      <button type="submit">Save task</button>
-    </form>
-  </div>
-    <div class ="task">
-    <div v-for="task in Tasks" v-bind:key="task.id">
-      <button v-if="$store.state.isAuthenticated" @click="editTask(task)">Edit</button>
-        <button v-if="$store.state.isAuthenticated" @click="deleteTask(task)">Delete</button>
-      <h1>T: {{ task.title }}</h1>
-      <h2>D: {{ task.description }}</h2>
-      <h3>C: {{ task.category_name }}</h3>
-      <h3> {{task.completed}}</h3>
-  </div>
+
+    <div v-if="taskToEdit" class="edit-task-form">
+      <form @submit.prevent="saveTask">
+        <input v-model="taskToEdit.title" placeholder="Task title" required>
+        <input v-model="taskToEdit.description" placeholder="Task description" required>
+        <select v-model="taskToEdit.category" required>
+          <option disabled value="">Please select a category</option>
+          <option v-for="category in categories" :value="category.id" :key="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+        <label><input type="checkbox" v-model="taskToEdit.completed"> Completed</label>
+        <button type="submit">Save task</button>
+      </form>
     </div>
-</div>
+
+    <div class="task-list">
+      <div v-for="task in Tasks" :key="task.id" class="task-item">
+        <button v-if="$store.state.isAuthenticated" @click="editTask(task)">Edit</button>
+        <button v-if="$store.state.isAuthenticated" @click="deleteTask(task)">Delete</button>
+        <h2>{{ task.title }}</h2>
+        <p>{{ task.description }}</p>
+        <p>Category: {{ task.category_name }}</p>
+        <p>Status: {{ task.completed ? 'Completed' : 'Incomplete' }}</p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -139,3 +142,46 @@ addTask(){
   }
 };
 </script>
+
+
+<style scoped>
+.task-manager {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.task-manager__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.task-form {
+  margin-bottom: 20px;
+}
+
+.edit-task-form {
+  margin-bottom: 20px;
+}
+
+.task-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.task-item button {
+  margin-right: 10px;
+}
+
+.task-item h2 {
+  margin: 0;
+}
+
+.task-item p {
+  margin: 5px 0;
+}
+</style>

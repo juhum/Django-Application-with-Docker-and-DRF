@@ -1,35 +1,30 @@
 <template>
-    <div class="container">
-        <h1>Login</h1>
-        <form @submit.prevent="submitForm">
-            <div class="field">
-                <label>Username</label>
-                <div class="control">
-                    <input type="text" class="input" v-model="username">
-                </div>
-            </div>
+  <div class="login-container">
+    <h1>Login</h1>
+    <form @submit.prevent="submitForm" class="login-form">
+      <div class="form-field">
+        <label for="username">Username</label>
+        <input type="text" id="username" v-model="username" class="input-field">
+      </div>
 
-            <div class="field">
-                <label>Password</label>
-                <div class="control">
-                    <input type="password" class="input" v-model="password">
-                </div>
-            </div>
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input type="password" id="password" v-model="password" class="input-field">
+      </div>
 
-            <div class="notification" v-if="errors.length">
-                <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
-            </div>
+      <div v-if="errors.length" class="error-notification">
+        <p v-for="error in errors" :key="error">{{ error }}</p>
+      </div>
 
-            <div class="field">
-                <div class="control">
-                    <button class="btn">Login</button>
-                </div>
-            </div>
+      <div class="form-field">
+        <button type="submit" class="login-btn">Login</button>
+      </div>
+    </form>
 
-            <hr>
-            <router-link to="/signup">Create new account</router-link>
-        </form>
-    </div>
+    <hr>
+
+    <router-link to="/signup" class="signup-link">Create new account</router-link>
+  </div>
 </template>
 
 <script>
@@ -85,3 +80,67 @@ export default{
     }
 }
 </script>
+
+
+<style scoped>
+.login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  margin-bottom: 10px;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.input-field {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 100%; /* Ensure input fields fill the container */
+}
+
+.error-notification {
+  margin-top: 10px;
+  background-color: red;
+  padding: 10px;
+  border: 1px solid #ff9999;
+  border-radius: 3px;
+}
+
+.login-btn {
+  padding: 8px 16px;
+  background-color: #121212;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: black;
+}
+
+.signup-link {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+</style>
