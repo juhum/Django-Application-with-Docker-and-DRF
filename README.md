@@ -99,3 +99,5 @@ python manage.py test
 Once the containers are up and running, you can access the application. 
 Open your web browser and navigate to http://localhost:8080 to access the fully functional Vue.js frontend.
 API endpoints are available at http://localhost:8000/api/v1/.
+
+On the fronted logged in user can make any CRUD operations, while signed out user can only read.
