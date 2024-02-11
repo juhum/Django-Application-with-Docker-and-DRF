@@ -108,7 +108,7 @@ export default{
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 3px;
-  width: 100%; /* Ensure input fields fill the container */
+  width: 100%; 
 }
 
 .error-notification {
