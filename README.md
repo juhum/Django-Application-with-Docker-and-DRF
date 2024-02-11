@@ -17,6 +17,11 @@ Ensure Docker is installed and running on your system.
 Navigate to the project directory.
 Change name of example.env to .env and enter the secret key.
 
+
+run:
+```bash
+python manage.py migrate
+```
 insert sample data 
 ```bash
 python manage.py populate_sample_data
