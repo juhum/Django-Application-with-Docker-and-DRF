@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '../store/index.js'
 import HomeView from '../views/HomeView.vue'
 import TaskView from '../views/TaskView'
 import CategoryView from '../views/CategoryView'
@@ -24,7 +25,7 @@ const routes = [
   },
   {
     path: '/signup',
-    name: 'signpup',
+    name: 'signup',
     component: SignUpView
   },
   {
@@ -47,5 +48,21 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.getItem("token");
+
+  if (to.name === 'login' || to.name === 'signup') {
+    if (isAuthenticated) {
+      next('/');
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
 
 export default router
