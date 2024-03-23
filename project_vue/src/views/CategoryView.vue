@@ -186,4 +186,7 @@ export default {
 .task p {
   margin: 5px 0;
 }
+.category-item:hover{
+  cursor: pointer;
+}
 </style>
