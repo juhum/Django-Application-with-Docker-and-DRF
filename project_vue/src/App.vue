@@ -105,6 +105,11 @@ button:hover {
   background-color: black;
 }
 
+.navbar-item:hover {
+  background-color: #555;
+  cursor: pointer;
+}
+
 </style>
 <script>
 import axios from 'axios'
