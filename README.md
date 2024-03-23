@@ -4,7 +4,7 @@
 
 Clone the repository 
 ```bash
-git clone https://github.com/juhum/Django-Application-with-Docker-and-DRF.git
+git clone https://github.com/juhum/tasker.git
 ```
 
 Navigate to the root directory of the project.
