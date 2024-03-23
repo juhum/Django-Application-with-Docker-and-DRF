@@ -1,5 +1,5 @@
 # Tasker
-
+Full-stack web application that allows to add categories and tasks.
 ## Installation
 
 Clone the repository 
