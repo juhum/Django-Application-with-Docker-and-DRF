@@ -4,6 +4,7 @@ import TaskView from '../views/TaskView'
 import CategoryView from '../views/CategoryView'
 import SignUpView from '../views/SignUpView'
 import LoginView from '../views/LoginView'
+import NotFoundView from '../views/NotFoundView'
 
 const routes = [
   {
@@ -30,6 +31,15 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginView
+  },
+  {
+    path: '/404',
+    name: 'notfound',
+    component: NotFoundView
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: { name: 'notfound' }
   },
 ]
 

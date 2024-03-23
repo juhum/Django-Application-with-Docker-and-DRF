@@ -20,7 +20,7 @@
   </section>
 
   <footer class="footer">
-    <p>Showcase</p>
+    <p>Tasker App</p>
     </footer>
   </div>
 </template>
