@@ -1,11 +1,10 @@
 <template>
 <div>
   <div class="home">
-    Dashboard
+    <h1>Hey checkout the latest task !</h1>
   </div>
     <div class ="task">
       <div v-if="latestTask">
-        <h1>Hey checkout the latest task !</h1>
         <h1>{{ latestTask.title }}</h1>
         <h2>{{ latestTask.description }}</h2>
         <h3>{{ latestTask.category_name }}</h3>
